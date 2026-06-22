@@ -28,6 +28,7 @@ const footerSections = [
       { label: "Sustainability", href: "#" },
       { label: "Careers", href: "#" },
       { label: "Press", href: "#" },
+      { label: "Seller Dashboard", href: "/seller/dashboard" },
     ],
   },
 ];
