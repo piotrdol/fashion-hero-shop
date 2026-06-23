@@ -6,6 +6,7 @@ import { ProductInfo } from "@/components/product-info";
 import { ProductDetailsAccordion } from "@/components/product-details-accordion";
 import { RelatedProducts } from "@/components/related-products";
 import { RecentlyViewedSection } from "./recently-viewed-section";
+import { ProductViewTracker } from "./product-view-tracker";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -41,6 +42,13 @@ export default async function ProductPage({ params }: PageProps) {
 
   return (
     <main className="max-w-7xl mx-auto px-4 md:px-8 py-6 md:py-10">
+      <ProductViewTracker
+        productId={product.id}
+        productName={product.name}
+        productSlug={product.slug}
+        productPrice={product.price}
+        productCategory={product.category}
+      />
       {/* Two-column layout: image 60% left, info 40% right */}
       <div className="grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-8 md:gap-12">
         <ImageGallery

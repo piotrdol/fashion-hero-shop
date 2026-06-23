@@ -3,12 +3,14 @@
 import { useRouter } from "next/navigation";
 import { Lock, TrendingDown, TrendingUp } from "lucide-react";
 import { logClick } from "@/lib/seller/analytics";
+import posthog from "posthog-js";
 
 export function QualityScoreWidget() {
   const router = useRouter();
 
   const handleClick = () => {
     logClick("quality_score_cta_click");
+    posthog.capture("quality_score_cta_clicked");
     router.push("/seller/insights");
   };
 

@@ -10,6 +10,7 @@ import { useCart } from "@/components/cart-provider";
 import { WishlistButton } from "@/components/wishlist-button";
 import { ViewersWidget } from "@/components/viewers-widget";
 import { getSellerById } from "@/data/sellers";
+import posthog from "posthog-js";
 
 interface ProductInfoProps {
   product: Product;
@@ -80,6 +81,15 @@ export function ProductInfo({ product }: ProductInfoProps) {
   function handleAddToCart() {
     if (!selectedSize) return;
     addItem(product, selectedColor, selectedSize);
+    posthog.capture("add_to_cart", {
+      product_id: product.id,
+      product_name: product.name,
+      product_slug: product.slug,
+      product_price: product.price,
+      product_category: product.category,
+      color: selectedColor.name,
+      size: selectedSize,
+    });
   }
 
   return (

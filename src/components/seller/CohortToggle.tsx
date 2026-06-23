@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { isInCohort, setInCohort } from "@/lib/seller/featureFlag";
+import posthog from "posthog-js";
 
 export function CohortToggle() {
   const [enabled, setEnabled] = useState(true);
@@ -17,6 +18,10 @@ export function CohortToggle() {
     const next = !enabled;
     setInCohort(next);
     setEnabled(next);
+    posthog.capture("feature_flag_toggled", {
+      flag: "quality_score_cohort",
+      value: next,
+    });
   };
 
   return (

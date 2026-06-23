@@ -10,6 +10,7 @@ import { FunnelBarChart } from "@/components/seller/FunnelBarChart";
 import { GlobalFilters } from "@/components/seller/GlobalFilters";
 import { isInCohort } from "@/lib/seller/featureFlag";
 import { getDashboardData, DATE_RANGES, type RangeKey, type CategoryKey } from "@/lib/seller/mockData";
+import posthog from "posthog-js";
 
 export default function SellerDashboardPage() {
   const [loading, setLoading] = useState(true);
@@ -22,6 +23,7 @@ export default function SellerDashboardPage() {
   const dataKey = `${range}:${category}`;
 
   useEffect(() => {
+    posthog.capture("seller_dashboard_viewed");
     const t = setTimeout(() => {
       setInCohortState(isInCohort());
       setLoading(false);
